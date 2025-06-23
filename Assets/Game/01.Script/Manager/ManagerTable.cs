@@ -11,7 +11,7 @@ namespace Game.Manager
         {
             get
             {
-                if(objectPoolManager == null)
+                if (objectPoolManager == null)
                 {
                     objectPoolManager = FindObjectOfType<ObjectPoolManager>(true);
                 }
@@ -24,7 +24,7 @@ namespace Game.Manager
         {
             get
             {
-                if(factoryContainer == null)
+                if (factoryContainer == null)
                 {
                     factoryContainer = FindObjectOfType<FactoryContainer>(true);
                 }
@@ -33,8 +33,22 @@ namespace Game.Manager
             }
         }
 
+        public static InputManager InputManager
+        {
+            get
+            {
+                if (inputManager == null)
+                {
+                    inputManager = FindObjectOfType<InputManager>(true);
+                }
+
+                return inputManager;
+            }
+        }
+
         private static ObjectPoolManager objectPoolManager = null;
         private static FactoryContainer factoryContainer = null;
+        private static InputManager inputManager = null;
     }
 }
 
