@@ -12,7 +12,7 @@ namespace Game.Util
 #if UNITY_EDITOR
             if (string.IsNullOrEmpty(color))
             {
-                Debug.Log(msg);
+                Debug.Log($"[LOG] {msg}");
             }
             else
             {
