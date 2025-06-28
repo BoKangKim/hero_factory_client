@@ -9,4 +9,9 @@ namespace Game.Const
         PointerDown,
         PointerUp
     }
+
+    public enum UnitType
+    { 
+        Standard
+    }
 }

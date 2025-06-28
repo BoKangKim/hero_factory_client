@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Const;
 using Game.Entity;
 using Game.Manager;
 using UnityEngine;
@@ -19,27 +20,30 @@ namespace Game.Factory
         public string Key => type.ToString();
     }
 
-    public class UnitFactory : FactoryBase<UnitBase>
+    public class UnitFactory : MonoBehaviour, IFactory
     {
         [SerializeField] private List<UnitPrefabEntry> unitPrefabEntrieList;
 
-        public override UnitBase Create(string key, Vector3 position, Quaternion rotation, Transform parent = null)
+        public UnityEngine.Object Create(string key, Vector3 position, Quaternion rotation, Transform parent = null)
         {
-            UnitPrefabEntry targetEntry = unitPrefabEntrieList.Find((value) => value.Key.Equals(key));
+            UnitPrefabEntry entry = unitPrefabEntrieList.Find((value) => value.Type.ToString().Equals(key));
 
-            if(targetEntry == null)
+            if (entry == null)
             {
-                Debug.LogError($"Not Found {key}");
                 return null;
             }
 
-            // ManagerTable.ObjectPoolManager.CreateOrGet<UnitBase>(targetEntry.Prefab, );
-            return null;
+            float angle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+
+            Vector3 rndPos = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle));
+            UnitBase unit = ManagerTable.ObjectPool.InstantiateT<UnitBase>(entry.Prefab.gameObject, rndPos, rotation, parent);
+
+            return unit;
         }
 
-        public override void Destroy(string key, UnitBase entity)
+        public void Release(UnityEngine.Object entity)
         {
-            throw new NotImplementedException();
+            ManagerTable.ObjectPool.DestroyPoolObject(entity as GameObject);
         }
     }
 }

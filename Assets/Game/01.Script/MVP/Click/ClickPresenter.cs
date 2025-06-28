@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Util;
@@ -9,6 +10,8 @@ namespace Game.MVP
     {
         private ClickModel model = null;
         private ClickView view = null;
+
+        public event Action<IModelData> onChangeData = null;
 
         public void Generate(ClickModel model, ClickView view)
         {
@@ -29,6 +32,7 @@ namespace Game.MVP
             }
 
             view.UpdateView(data);
+            onChangeData?.Invoke(data);
         }
 
         public void OnEvent(IEventData eventData)

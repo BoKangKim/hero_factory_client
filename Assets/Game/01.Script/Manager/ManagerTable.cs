@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using Game.Factory;
+using Game.MVP;
 using UnityEngine;
 
 namespace Game.Manager
 {
     public class ManagerTable : MonoBehaviour
     {
-        public static ObjectPoolManager ObjectPoolManager
+        public static ObjectPool ObjectPool
         {
             get
             {
-                if (objectPoolManager == null)
+                if (objectPool == null)
                 {
-                    objectPoolManager = FindObjectOfType<ObjectPoolManager>(true);
+                    objectPool = FindObjectOfType<ObjectPool>();
                 }
 
-                return objectPoolManager;
+                return objectPool;
             }
         }
 
@@ -46,9 +47,23 @@ namespace Game.Manager
             }
         }
 
-        private static ObjectPoolManager objectPoolManager = null;
+        public static PresenterContainer PresenterContainer
+        {
+            get
+            {
+                if (presenterContainer == null)
+                {
+                    presenterContainer = FindObjectOfType<PresenterContainer>(true);
+                }
+
+                return presenterContainer;
+            }
+        }
+
+        private static ObjectPool objectPool = null;
         private static FactoryContainer factoryContainer = null;
         private static InputManager inputManager = null;
+        private static PresenterContainer presenterContainer = null;
     }
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Game.Util;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.MVP
 {

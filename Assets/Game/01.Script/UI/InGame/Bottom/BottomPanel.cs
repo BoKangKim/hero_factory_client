@@ -9,7 +9,7 @@ using UnityEngine.UI;
 namespace Game.UI
 {
     [Serializable]
-    public class ButtonContentPair : Pair<Button, GameObject>
+    public class ButtonContentPair : Pair<Button, Content>
     {
         private int index = 0;
 
@@ -37,6 +37,7 @@ namespace Game.UI
 
             value1.onClick.RemoveAllListeners();
             value1.onClick.AddListener(() => action?.Invoke(this.index));
+            value2.Init();
         }
     }
 
@@ -52,6 +53,7 @@ namespace Game.UI
             {
                 contentList[i].Init(i, OnClick);
             }
+
             OnClick(0);
         }
 
@@ -64,7 +66,7 @@ namespace Game.UI
                     contentList[i].Enable();
                 }
                 else
-                { 
+                {
                     contentList[i].Disable();
                 }
             }
