@@ -11,7 +11,15 @@ namespace Game.Const
     }
 
     public enum UnitType
-    { 
+    {
         Standard
+    }
+
+    public enum StateType
+    {
+        Idle,
+        Move,
+        Attack,
+        Death
     }
 }

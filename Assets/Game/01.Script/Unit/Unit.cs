@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.Entity
 {
-    public class UnitBase : MonoBehaviour, FactoryEntity
+    public class Unit : MonoBehaviour, FactoryEntity
     {
     }
 }

@@ -1995,9 +1995,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a4d77844c3211f42ab2fff8b96f9dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: a1d3c2f7fb5422a40abf2c731d11b236, type: 2}
   unitPrefabEntrieList:
   - type: 0
-    prefab: {fileID: -8465058664479946307, guid: 4f7dd98a15b34e9498cbdf212bfb44d0, type: 3}
+    prefab: {fileID: 319031744092817230, guid: 4f7dd98a15b34e9498cbdf212bfb44d0, type: 3}
 --- !u!1 &1116032210
 GameObject:
   m_ObjectHideFlags: 0
