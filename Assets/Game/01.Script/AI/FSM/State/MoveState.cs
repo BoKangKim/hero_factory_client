@@ -11,6 +11,8 @@ namespace Game.AI.FSM
         private ActorController controller = null;
         private IMoveStrategy moveStrategy = null;
 
+        private Vector3 dir;
+
         public MoveState(ActorController controller)
         {
             this.controller = controller;
@@ -19,6 +21,7 @@ namespace Game.AI.FSM
 
         public void Enter()
         {
+            dir = moveStrategy.GetMoveDirection(controller);
         }
 
         public void Exit()
@@ -27,8 +30,6 @@ namespace Game.AI.FSM
 
         public void Update()
         {
-            Vector3 dir = moveStrategy.GetMoveDirection(controller);
-
             controller.Actor.Move(dir, controller.ActorData.Speed);
         }
     }
