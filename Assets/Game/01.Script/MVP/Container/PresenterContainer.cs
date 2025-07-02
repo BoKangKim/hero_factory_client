@@ -1,23 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+using Game.Util;
 using UnityEngine;
 
 namespace Game.MVP
 {
-    // TODO : 다양한 Presenter를 받을 수 있도록 수정해야 됨
     public class PresenterContainer : MonoBehaviour
     {
-        private ClickPresenter clickPresenter = null;
+        private Dictionary<string, IPresenter> presenterDict = new Dictionary<string, IPresenter>();
 
         private void Awake()
         {
-            clickPresenter = new ClickPresenter();
+            ClickPresenter clickPresenter = new ClickPresenter();
             clickPresenter.Generate(new ClickModel(), FindObjectOfType<ClickView>());
+
+            MonsterPresenter monsterPresenter = new MonsterPresenter();
+            monsterPresenter.Generate(new MonsterModel(), FindObjectOfType<MonsterView>());
+
+
+            presenterDict.Add(nameof(ClickPresenter), clickPresenter);
+            presenterDict.Add(nameof(MonsterPresenter), monsterPresenter);
         }
 
-        public ClickPresenter GetClickPresenter()
+        public T GetPresenter<T>() where T : class, IPresenter
         {
-            return clickPresenter;
+            IPresenter presenter = null;
+
+            if (presenterDict.TryGetValue(typeof(T).Name, out presenter))
+            {
+                return presenter as T;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
