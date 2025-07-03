@@ -60,10 +60,24 @@ namespace Game.Manager
             }
         }
 
+        public static CoroutineRunner CoroutineRunner
+        {
+            get
+            {
+                if (coroutineRunner == null)
+                {
+                    coroutineRunner = FindObjectOfType<CoroutineRunner>(true);
+                }
+
+                return coroutineRunner;
+            }
+        }
+
         private static ObjectPool objectPool = null;
         private static FactoryContainer factoryContainer = null;
         private static InputManager inputManager = null;
         private static PresenterContainer presenterContainer = null;
+        private static CoroutineRunner coroutineRunner = null;
     }
 }
 

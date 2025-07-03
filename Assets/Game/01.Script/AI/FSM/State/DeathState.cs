@@ -7,9 +7,9 @@ namespace Game.AI.FSM
 {
     public class DeathState : IState
     {
-        private UnitController controller = null;
+        private ActorController controller = null;
 
-        public DeathState(UnitController controller)
+        public DeathState(ActorController controller)
         {
             this.controller = controller;
         }

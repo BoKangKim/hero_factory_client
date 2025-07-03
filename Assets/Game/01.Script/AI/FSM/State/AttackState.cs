@@ -7,8 +7,8 @@ namespace Game.AI.FSM
 {
     public class AttackState : IState
     {
-        private UnitController controller = null;
-        public AttackState(UnitController controller)
+        private ActorController controller = null;
+        public AttackState(ActorController controller)
         {
             this.controller = controller;
         }

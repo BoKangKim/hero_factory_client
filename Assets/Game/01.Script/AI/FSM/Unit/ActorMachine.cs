@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Game.AI.FSM
 {
-    public class UnitMachine : MonoBehaviour, IMachine
+    public class ActorMachine : MonoBehaviour, IMachine
     {
         protected Dictionary<string, IState> stateDict = new Dictionary<string, IState>();
         protected StateType defaultStartState;
@@ -23,7 +23,7 @@ namespace Game.AI.FSM
             curState.Update();
         }
 
-        public void Initializing(StateConfig config, UnitController controller)
+        public void Initializing(StateConfig config, ActorController controller)
         {
             var typeList = config.StateTypeList;
 

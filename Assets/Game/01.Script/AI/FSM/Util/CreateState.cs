@@ -8,7 +8,7 @@ namespace Game.AI.FSM
 {
     public static class CreateState
     {
-        public static IState Create(StateType type, UnitController controller)
+        public static IState Create(StateType type, ActorController controller)
         {
             switch (type)
             {

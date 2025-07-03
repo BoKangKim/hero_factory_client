@@ -1,21 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using Game.Entity;
+using Game.Strategy;
 using UnityEngine;
 
 namespace Game.AI.FSM
 {
     public class MoveState : IState
     {
-        private UnitController controller = null;
+        private ActorController controller = null;
+        private IMoveStrategy moveStrategy = null;
 
-        public MoveState(UnitController controller)
+        private Vector3 dir;
+
+        public MoveState(ActorController controller)
         {
             this.controller = controller;
+            moveStrategy = controller.ActorData.CreateMoveStrategy();
         }
 
         public void Enter()
         {
+            dir = moveStrategy.GetMoveDirection(controller);
         }
 
         public void Exit()
@@ -24,6 +30,7 @@ namespace Game.AI.FSM
 
         public void Update()
         {
+            controller.Actor.Move(dir, controller.ActorData.Speed);
         }
     }
 }

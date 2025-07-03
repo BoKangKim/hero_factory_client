@@ -8,7 +8,7 @@ namespace Game.AI.FSM
 {
     public interface IMachine
     {
-        public void Initializing(StateConfig config, UnitController controller);
+        public void Initializing(StateConfig config, ActorController controller);
         public void StartMachine();
         public void StopMachine();
         public void ChangeState(string key);

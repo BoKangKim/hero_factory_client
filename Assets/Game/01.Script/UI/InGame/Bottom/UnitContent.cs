@@ -25,7 +25,7 @@ namespace Game.UI
 
             summonTestButton.interactable = false;
 
-            ClickPresenter clickPresenter = ManagerTable.PresenterContainer.GetClickPresenter();
+            ClickPresenter clickPresenter = ManagerTable.PresenterContainer.GetPresenter<ClickPresenter>();
             clickPresenter.onChangeData += OnChangeClick;
         }
 

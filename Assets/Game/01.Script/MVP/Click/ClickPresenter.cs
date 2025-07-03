@@ -6,21 +6,21 @@ using UnityEngine;
 
 namespace Game.MVP
 {
-    public class ClickPresenter : IPresenter<ClickModel, ClickView>
+    public class ClickPresenter : IPresenter
     {
         private ClickModel model = null;
         private ClickView view = null;
 
         public event Action<IModelData> onChangeData = null;
 
-        public void Generate(ClickModel model, ClickView view)
+        public void Generate(IModel model, IView view)
         {
-            this.model = model;
-            this.view = view;
+            this.model = model as ClickModel;
+            this.view = view as ClickView;
 
-            model.Init();
-            model.onChangeData += OnChangeData;
-            view.Init(this);
+            this.model.Init();
+            this.model.onChangeData += OnChangeData;
+            this.view.Init(this);
         }
 
         public void OnChangeData(IModelData data)

@@ -10,7 +10,19 @@ namespace Game.Const
         PointerUp
     }
 
+    public enum ActorType
+    {
+        Unit,
+        Monster
+    }
+
+    // TODO : Unit, Monster Type Structure
     public enum UnitType
+    {
+        Standard
+    }
+
+    public enum MonsterType
     {
         Standard
     }
@@ -21,5 +33,17 @@ namespace Game.Const
         Move,
         Attack,
         Death
+    }
+
+    public enum MoveStrategyType
+    {
+        Unit,
+        Monster
+    }
+
+    public enum AttackStrategyType
+    {
+        Melee,
+        Range
     }
 }

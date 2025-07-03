@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.AI;
 using Game.AI.FSM;
 using Game.Const;
 using Game.Entity;
@@ -10,25 +11,24 @@ using UnityEngine;
 namespace Game.Factory
 {
     [Serializable]
-    public class UnitPrefabEntry
+    public class MonsterPrefabEntry
     {
-        [SerializeField] private UnitType type;
+        [SerializeField] private MonsterType type;
         [SerializeField] private ActorController prefab;
 
-        public UnitType Type => type;
+        public MonsterType Type => type;
         public ActorController Prefab => prefab;
-
-        public string Key => type.ToString();
     }
 
-    public class UnitFactory : MonoBehaviour, IFactory
+    public class MonsterFactory : MonoBehaviour,IFactory
     {
         [SerializeField] private StateConfig config;
-        [SerializeField] private List<UnitPrefabEntry> unitPrefabEntrieList;
+        [SerializeField] private List<MonsterPrefabEntry> monsterPrefabEntrieList;
+        [SerializeField] private float spawnRadius = 5f;
 
         public GameObject Create(string key, Vector3 position, Quaternion rotation, Transform parent = null)
         {
-            UnitPrefabEntry entry = unitPrefabEntrieList.Find((value) => value.Type.ToString().Equals(key));
+            MonsterPrefabEntry entry = monsterPrefabEntrieList.Find((value) => value.Type.ToString().Equals(key));
 
             if (entry == null)
             {
@@ -37,11 +37,11 @@ namespace Game.Factory
 
             float angle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
 
-            Vector3 rndPos = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle));
-            ActorController unit = ManagerTable.ObjectPool.InstantiateT<ActorController>(entry.Prefab.gameObject, rndPos, rotation, parent);
-            unit.Initialize(config);
+            Vector3 rndAngle = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * spawnRadius;
+            ActorController monster = ManagerTable.ObjectPool.InstantiateT<ActorController>(entry.Prefab.gameObject, rndAngle, rotation, parent);
+            monster.Initialize(config);
 
-            return unit.gameObject;
+            return monster.gameObject;
         }
 
         public void Release(GameObject entity)
@@ -50,4 +50,3 @@ namespace Game.Factory
         }
     }
 }
-
