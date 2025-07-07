@@ -12,9 +12,9 @@ namespace Game.Strategy
             switch (actorData.MoveStrategyType)
             {
                 case Const.MoveStrategyType.Unit:
-                    break;
+                    return new UnitMoveStrategy();                    
                 case Const.MoveStrategyType.Monster:
-                    return new MonsterMove();
+                    return new MonsterMoveStrategy();
             }
 
             return null;

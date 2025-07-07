@@ -26,7 +26,7 @@ namespace Game.Factory
         [SerializeField] private StateConfig config;
         [SerializeField] private List<UnitPrefabEntry> unitPrefabEntrieList;
 
-        public GameObject Create(string key, Vector3 position, Quaternion rotation, Transform parent = null)
+        public FactoryEntity Create(string key, Vector3 position, Quaternion rotation, Transform parent = null)
         {
             UnitPrefabEntry entry = unitPrefabEntrieList.Find((value) => value.Type.ToString().Equals(key));
 
@@ -35,13 +35,10 @@ namespace Game.Factory
                 return null;
             }
 
-            float angle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
-
-            Vector3 rndPos = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle));
-            ActorController unit = ManagerTable.ObjectPool.InstantiateT<ActorController>(entry.Prefab.gameObject, rndPos, rotation, parent);
+            ActorController unit = ManagerTable.ObjectPool.InstantiateT<ActorController>(entry.Prefab.gameObject, Vector3.zero, rotation, parent);
             unit.Initialize(config);
 
-            return unit.gameObject;
+            return unit.Actor;
         }
 
         public void Release(GameObject entity)

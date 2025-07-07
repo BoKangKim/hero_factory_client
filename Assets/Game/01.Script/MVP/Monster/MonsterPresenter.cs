@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Game.Const;
+using Game.Entity;
 using Game.Factory;
 using Game.Manager;
 using Game.Util;
@@ -56,13 +57,18 @@ namespace Game.MVP
 
                 if (time >= spawnTime)
                 {
-                    factory.Create(MonsterType.Standard.ToString(), Vector3.zero, Quaternion.identity);
-                    model.OnSpawnMonster();
+                    Actor monster = factory.Create(MonsterType.Standard.ToString(), Vector3.zero, Quaternion.identity) as Actor;
+                    model.OnSpawnMonster(monster);
                     time = 0f;
                 }
 
                 yield return null;
             }
+        }
+
+        public Actor FindNearestMonster(Vector3 pos)
+        {
+            return model.FindNearestMonster(pos);
         }
     }
 }

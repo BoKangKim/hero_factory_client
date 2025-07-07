@@ -10,7 +10,11 @@ namespace Game.Entity
     public class Actor : MonoBehaviour, IActor, FactoryEntity
     {
         [SerializeField] private ActorType type;
+
+        private bool isDead = false;
+
         public ActorType Type => type;
+        public bool IsDead => isDead;
 
         public void Attack()
         {
@@ -18,10 +22,12 @@ namespace Game.Entity
 
         public void Death()
         {
+            this.isDead = true;
         }
 
         public void Idle()
         {
+            this.isDead = false;
         }
 
         public void Move(Vector3 direction, float speed)

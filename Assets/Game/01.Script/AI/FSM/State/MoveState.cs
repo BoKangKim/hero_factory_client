@@ -11,6 +11,7 @@ namespace Game.AI.FSM
         private ActorController controller = null;
         private IMoveStrategy moveStrategy = null;
 
+        private Vector3 destination;
         private Vector3 dir;
 
         public MoveState(ActorController controller)
@@ -21,7 +22,8 @@ namespace Game.AI.FSM
 
         public void Enter()
         {
-            dir = moveStrategy.GetMoveDirection(controller);
+            destination = moveStrategy.GetDestination(controller);
+            dir = (destination - controller.transform.position).normalized;
         }
 
         public void Exit()
@@ -30,6 +32,13 @@ namespace Game.AI.FSM
 
         public void Update()
         {
+            if (Vector3.SqrMagnitude(destination - controller.transform.position) <= 0.1f)
+            {
+                destination = moveStrategy.GetDestination(controller);
+                dir = (destination - controller.transform.position).normalized;
+                return;
+            }
+
             controller.Actor.Move(dir, controller.ActorData.Speed);
         }
     }

@@ -7,6 +7,6 @@ namespace Game.Strategy
 {
     public interface IMoveStrategy
     {
-        public Vector3 GetMoveDirection(ActorController controller);
+        public Vector3 GetDestination(ActorController controller);
     }
 }
