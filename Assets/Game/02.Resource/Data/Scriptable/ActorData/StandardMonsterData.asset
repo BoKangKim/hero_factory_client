@@ -15,7 +15,7 @@ MonoBehaviour:
   hp: 10
   attackSpeed: 5
   attackPower: 5
-  attackRange: 1
+  attackRange: 0.1
   speed: 1
   moveStrategyType: 1
   attackStrategyType: 0

@@ -5,6 +5,7 @@ using Game.AI.FSM;
 using Game.Const;
 using Game.Entity;
 using Game.Manager;
+using Game.MVP;
 using UnityEngine;
 
 namespace Game.Factory
@@ -37,6 +38,9 @@ namespace Game.Factory
 
             ActorController unit = ManagerTable.ObjectPool.InstantiateT<ActorController>(entry.Prefab.gameObject, Vector3.zero, rotation, parent);
             unit.Initialize(config);
+
+            UnitPresenter presenter = ManagerTable.PresenterContainer.GetPresenter<UnitPresenter>();
+            presenter.OnSpawnUnit(unit.Actor);
 
             return unit.Actor;
         }

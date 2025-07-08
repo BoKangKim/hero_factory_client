@@ -17,9 +17,12 @@ namespace Game.MVP
             MonsterPresenter monsterPresenter = new MonsterPresenter();
             monsterPresenter.Generate(new MonsterModel(), FindObjectOfType<MonsterView>());
 
+            UnitPresenter unitPresenter = new UnitPresenter();
+            unitPresenter.Generate(new UnitModel(), FindObjectOfType<UnitView>());
 
             presenterDict.Add(nameof(ClickPresenter), clickPresenter);
             presenterDict.Add(nameof(MonsterPresenter), monsterPresenter);
+            presenterDict.Add(nameof(UnitPresenter), unitPresenter);
         }
 
         public T GetPresenter<T>() where T : class, IPresenter

@@ -10,10 +10,11 @@ namespace Game.Entity
     public class Actor : MonoBehaviour, IActor, FactoryEntity
     {
         [SerializeField] private ActorType type;
-
+        private Actor target = null;
         private bool isDead = false;
 
         public ActorType Type => type;
+        public Actor Target => target;
         public bool IsDead => isDead;
 
         public void Attack()
@@ -35,6 +36,16 @@ namespace Game.Entity
             Vector3 result = transform.position + direction * speed * Time.deltaTime;
 
             transform.position = result;
+        }
+
+        public void SetTarget(Actor target)
+        {
+            if (target.Type == type)
+            {
+                return;
+            }
+            
+            this.target = target;
         }
     }
 }
