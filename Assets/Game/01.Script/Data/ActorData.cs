@@ -18,6 +18,7 @@ namespace Game.Data
         [SerializeField] private AttackStrategyType attackStrategyType;
 
         public float Speed => speed;
+        public float AttackRange => attackRange;
 
         public MoveStrategyType MoveStrategyType => moveStrategyType;
         public AttackStrategyType AttackStrategyType => attackStrategyType;

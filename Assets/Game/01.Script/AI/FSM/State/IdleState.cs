@@ -17,6 +17,7 @@ namespace Game.AI.FSM
 
         public void Enter()
         {
+            controller.Actor.Idle();
             controller.ActorMachine.ChangeState(nameof(StateType.Move));
         }
 

@@ -20,13 +20,13 @@ namespace Game.Factory
         public ActorController Prefab => prefab;
     }
 
-    public class MonsterFactory : MonoBehaviour,IFactory
+    public class MonsterFactory : MonoBehaviour, IFactory
     {
         [SerializeField] private StateConfig config;
         [SerializeField] private List<MonsterPrefabEntry> monsterPrefabEntrieList;
         [SerializeField] private float spawnRadius = 5f;
 
-        public GameObject Create(string key, Vector3 position, Quaternion rotation, Transform parent = null)
+        public FactoryEntity Create(string key, Vector3 position, Quaternion rotation, Transform parent = null)
         {
             MonsterPrefabEntry entry = monsterPrefabEntrieList.Find((value) => value.Type.ToString().Equals(key));
 
@@ -41,7 +41,7 @@ namespace Game.Factory
             ActorController monster = ManagerTable.ObjectPool.InstantiateT<ActorController>(entry.Prefab.gameObject, rndAngle, rotation, parent);
             monster.Initialize(config);
 
-            return monster.gameObject;
+            return monster.Actor;
         }
 
         public void Release(GameObject entity)

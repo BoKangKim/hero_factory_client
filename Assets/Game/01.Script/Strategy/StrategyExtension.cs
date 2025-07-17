@@ -12,14 +12,26 @@ namespace Game.Strategy
             switch (actorData.MoveStrategyType)
             {
                 case Const.MoveStrategyType.Unit:
-                    break;
+                    return new UnitMoveStrategy();
                 case Const.MoveStrategyType.Monster:
-                    return new MonsterMove();
+                    return new MonsterMoveStrategy();
             }
 
             return null;
         }
-        
+
+        public static ITargetProvider CreateTargetProvider(this ActorData actorData)
+        { 
+            switch (actorData.MoveStrategyType)
+            {
+                case Const.MoveStrategyType.Unit:
+                    return new UnitTargetProvider();
+                case Const.MoveStrategyType.Monster:
+                    return new MonsterTargetProvider();
+            }
+
+            return null;
+        }
     }
 
 }

@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Game.Strategy
 {
-    public interface IMoveStrategy
+    public interface ITargetProvider
     {
         public void Init();
-        public Vector3 GetDestination(ActorController controller);
+        public Actor FindTargetInRange(Vector3 pos, float range);
     }
 }

@@ -1,24 +1,54 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Entity;
 using UnityEngine;
 
 namespace Game.MVP
 {
     public class MonsterModelData : IModelData
     {
-        private int monsterCount = 0;
+        private List<Actor> monsterList = new List<Actor>();
 
-        public int MonsterCount => monsterCount;
+        public int MonsterCount => monsterList.Count;
 
-        public MonsterModelData()
+        public void AddMonster(Actor monster)
         {
-            monsterCount = 0;
+            this.monsterList.Add(monster);
         }
 
-        public void AddMonsterCount()
+        public void RemoveMonster(Actor monster)
         {
-            this.monsterCount++;
+            this.monsterList.Remove(monster);
+        }
+
+        public Actor FindNearestMonster(Vector3 pos)
+        {
+            if (monsterList.Count == 0)
+            {
+                return null;
+            }
+
+            float minMag = Vector3.SqrMagnitude(pos - monsterList[0].transform.position);
+            Actor nearestMonster = monsterList[0];
+
+            for (int i = 1; i < monsterList.Count; i++)
+            {
+                if (monsterList[i].IsDead)
+                {
+                    continue;
+                }
+                
+                float mag = Vector3.SqrMagnitude(pos - monsterList[i].transform.position);
+
+                if (mag < minMag)
+                {
+                    minMag = mag;
+                    nearestMonster = monsterList[i];
+                }
+            }
+
+            return nearestMonster;
         }
     }
     public class MonsterModel : IModel
@@ -33,10 +63,15 @@ namespace Game.MVP
             onChangeData?.Invoke(data);
         }
 
-        public void OnSpawnMonster()
+        public void OnSpawnMonster(Actor monster)
         {
-            data.AddMonsterCount();
+            data.AddMonster(monster);
             onChangeData?.Invoke(data);
+        }
+
+        public Actor FindNearestMonster(Vector3 pos)
+        {
+            return data.FindNearestMonster(pos);
         }
     }
 }
